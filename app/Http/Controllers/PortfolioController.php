@@ -8,9 +8,9 @@ use App\Models\User;
 
 class PortfolioController extends Controller
 {
-    public function GenerateData()
+    public function index()
     {
-        //factory(User::class, 100)->create();
+        $user = \App\Models\User::get()->first();
+        dd($user->works);
     }
-
 }

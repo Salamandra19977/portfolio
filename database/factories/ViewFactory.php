@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Comment;
+use App\Models\View;
 use Faker\Generator as Faker;
 
-$factory->define(Comment::class, function (Faker $faker) {
+$factory->define(View::class, function (Faker $faker) {
     return [
-        'text' => $faker->text(100),
+        'ip' => $faker->unique()->ipv4
     ];
 });

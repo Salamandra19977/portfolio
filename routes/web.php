@@ -13,5 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PortfolioController@GenerateData');
-Route::get('/', 'UserController@GetUsers');
+Route::get('/', 'PortfolioController@index');

@@ -17,14 +17,21 @@ class CreateWorksTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->bigInteger('user_id')->unsigned();
-            $table->integer('views');
-            $table->integer('like');
-            $table->integer('dislike');
-            $table->bigInteger('status_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('status_id');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
+        });
+
+        Schema::table('works',function (Blueprint $table) {
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('statuses')
+                ->onDelete('cascade');
         });
     }
 

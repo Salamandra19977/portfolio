@@ -13,13 +13,13 @@ class StatusesTableSeeder extends Seeder
     {
         DB::table('statuses')->insert([
             [
-                'name' => 'опубликованно'
+                'name' => 'published'
             ],
             [
-                'name' => 'заблокированно'
+                'name' => 'blocked'
             ],
             [
-                'name' => 'удаленно'
+                'name' => 'remotely'
             ]
         ]);
     }

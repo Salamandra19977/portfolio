@@ -2,13 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Models\Image;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Image::class, function (Faker $faker) {
     return [
-        'name' => $faker->image(),
+        'name' => 'example.png',
         'size' => $faker->biasedNumberBetween(10,5000),
-        'work_id' => $faker->biasedNumberBetween(0,100),
     ];
 });
