@@ -13,4 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PortfolioController@index');
+Route::get('/', 'WorkController@index');
+Auth::routes();
+
+Route::get('/userprofile', 'UserProfileController@index')->name('userprofile');

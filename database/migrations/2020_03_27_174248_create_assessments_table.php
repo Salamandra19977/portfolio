@@ -15,7 +15,7 @@ class CreateAssessmentsTable extends Migration
     {
         Schema::create('assessments', function (Blueprint $table) {
             $table->id();
-            $table->integer('assessment')->default(0)->comment('1-лайк, -1 - дизлайк');
+            $table->boolean('assessment');
             $table->unsignedBigInteger('work_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
