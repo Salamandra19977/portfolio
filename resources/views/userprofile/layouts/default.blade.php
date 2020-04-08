@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield("title","Document")</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,600">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/css/fontastic.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/style.default.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
+</head>
 <body>
 
 @include("userprofile.layouts.blocks.nav.index")
@@ -23,6 +25,12 @@
 <script src="{{ mix('/js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.js"></script>
+<script src ="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <script src="{{ asset('/js/front.js') }}"></script>
+<script src="{{asset('/js/assessment.js')}}"></script>
+<script type="text/javascript">
+    var token = '{{ Session::token() }}';
+    var urlAssessment = '{{route('work.assessment')}}';
+</script>
 </body>
 </html>

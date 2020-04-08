@@ -10,7 +10,7 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        $user = \App\Models\User::get()->first();
+        $user = User::get()->first();
         dd($user->works);
     }
 }

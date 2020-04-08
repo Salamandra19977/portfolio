@@ -11,10 +11,20 @@
 *     GENERAL
 * =====================================================
 */
-
-
+.dislike {
+  color: #495057;
+}
+.like {
+  color: #495057;
+}
+.assessment {
+  color: #E7475E;
+}
 .text-bold {
   font-weight: 700;
+}
+.add {
+  height: 68vh;
 }
 .auth {
   padding: 10rem 0;
@@ -30,12 +40,6 @@
 }
 .comment {
   color: #495057;
-}
-.dislike {
-  color: #E7475E;
-}
-.like {
-  color: #2a9055;
 }
 .navblock {
   margin-top: 30px;
@@ -1368,10 +1372,6 @@ a {
   text-decoration: none;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-}
-
-a:hover, a:focus {
-  color: #c71a33;
 }
 
 h1,

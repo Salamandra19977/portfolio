@@ -7,13 +7,13 @@
         <div class="container">
             <header>
                 <h2>Популярные работы</h2>
-                <p class="text-big">Проекты, набравшие более всего просмотров и оценок</p>
+                <p class="text-big">Проекты, набравшие более всего просмотров</p>
             </header>
             <div class="row">
                 @forelse($works as $work)
                 <div class="post col-md-4 position-relative">
                     <div class="post-thumbnail">
-                        <img src="https://preview.redd.it/yxsli0ixwm4z.jpg?width=960&crop=smart&auto=webp&s=ddaf7983de963092d0a728f068441be44b1d2a70" alt="..." class="img-fluid">
+                        <img  src="http://portfolio/storage/{{$work->images->first()->patch}}" alt="..." class="img-fluid">
                         <p class="h6 position-absolute m-3 p-4 justify-content-center work_name text-white ">{{$work->name}}</p>
                     </div>
                     <div class="post-details pb-2">
@@ -25,11 +25,11 @@
                             </div>
                             <div class="col-lg-2 dislike">
                                 <i class="fa fa-thumbs-down"></i>
-                                <span>12</span>
+                                <span>{{$work->assessments->where("assessment","=","0")->count('id')}}</span>
                             </div>
                             <div class="col-lg-2 like">
                                 <i class="fa fa-thumbs-up"></i>
-                                <span>12</span>
+                                <span>{{$work->assessments->where("assessment","=","1")->count('id')}}</span>
                             </div>
                             <div class="col-lg-2 comment">
                                 <i class="fa fa-comment "></i>

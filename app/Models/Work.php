@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Work extends Model
 {
+
+    protected $fillable = [
+        'name', 'description','user_id','status_id'
+    ];
+
     public function views()
     {
         return $this->hasMany('App\Models\View');
