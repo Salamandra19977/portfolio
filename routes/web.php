@@ -24,7 +24,14 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/userprofile/edit/work/id/{id}', 'WorkController@edit')->name('work.edit');
     Route::post('/userprofile/update/work/id/{id}', 'WorkController@update')->name('work.update');
     Route::post('/userprofile/store/work', 'WorkController@store')->name('work.store');
+
     Route::get('/userprofile/work/remove/image/id/{id}', 'ImageController@destroy')->name('image.remove');
 
+    Route::post('/save/comment','CommentController@store')->name('comment.store');
+    Route::post('/edit/comment/{id}','CommentController@update')->name('comment.edit');
+    Route::get('/remove/comment/{id}','CommentController@destroy')->name('comment.remove');
+
     Route::post('/assessment','WorkController@assessment')->name('work.assessment');
+
+
 });

@@ -72,7 +72,7 @@ class WorkController extends Controller
      */
     public function show($id)
     {
-        $work = Work::where("id", $id)->get()->first();
+        $work = Work::where("id", $id)->first();
         return view('userprofile.works.show', compact('work'));
     }
 
@@ -84,7 +84,7 @@ class WorkController extends Controller
      */
     public function edit($id)
     {
-        $work = Work::where("id", $id)->get()->first();
+        $work = Work::where("id", $id)->first();
         return view('userprofile.works.edit', compact('work'));
     }
 
@@ -97,7 +97,7 @@ class WorkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $work = Work::where("id", $id)->get()->first();
+        $work = Work::where("id", $id)->first();
         if($work->user_id == Auth::id()){
             $work->update([
                 'name' => $request['name'],
@@ -131,7 +131,7 @@ class WorkController extends Controller
      */
     public function destroy($id)
     {
-        $work = Work::where("id", $id)->get()->first();
+        $work = Work::where("id", $id)->first();
         if($work->user_id == Auth::id()) {
             $images = $work->images;
             foreach ($images as $image) {
@@ -162,25 +162,12 @@ class WorkController extends Controller
                         'work_id' => $work_id,
                         'user_id' => $user->id
                     ]);
-                    $countLike = $work->assessments->where("assessment","=","1")->count('id');
-                    $countDisLike = $work->assessments->where("assessment","=","0")->count('id');
-
-                    return [
-                        "countLike" => $countLike,
-                        "countDisLike" => $countDisLike
-                    ];
+                    return $this->countAssessment($work);
                 }
                 else
                 {
                     $assessment->delete();
-
-                    $countLike = $work->assessments->where("assessment","=","1")->count('id');
-                    $countDisLike = $work->assessments->where("assessment","=","0")->count('id');
-
-                    return [
-                        "countLike" => $countLike,
-                        "countDisLike" => $countDisLike
-                    ];
+                    return $this->countAssessment($work);
                 }
             }
             else
@@ -189,20 +176,24 @@ class WorkController extends Controller
                 $data['assessment'] = $assessmentRequest;
                 $data['work_id'] = $work_id;
                 $data['user_id'] = $user->id;
-
                 Assessment::add($data);
 
-                $countLike = $work->assessments->where("assessment","=","1")->count('id');
-                $countDisLike = $work->assessments->where("assessment","=","0")->count('id');
-
-                return [
-                    "countLike" => $countLike,
-                    "countDisLike" => $countDisLike
-                ];
+                return $this->countAssessment($work);
             }
         }
 
         return $request;
+    }
+
+    public function countAssessment($work)
+    {
+        $countLike = $work->assessments->where("assessment","=","1")->count('id');
+        $countDisLike = $work->assessments->where("assessment","=","0")->count('id');
+
+        return [
+            "countLike" => $countLike,
+            "countDisLike" => $countDisLike
+        ];
     }
 
 }

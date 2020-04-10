@@ -21,23 +21,24 @@ class Work extends Model
         return $this->hasMany('App\Models\Assessment');
     }
 
-    public function comments()
-    {
-        return $this->hasMany('App\Models\Comment');
-    }
-
     public function statuse()
     {
         return $this->belongsTo('App\Models\Status');
     }
 
-    public function user(){
-
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment')->whereNull('parent_id');
     }
 
     public function images()
     {
         return $this->hasMany('App\Models\Image');
     }
+
 }

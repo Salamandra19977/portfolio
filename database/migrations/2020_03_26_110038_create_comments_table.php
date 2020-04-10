@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('work_id');
             $table->unsignedBigInteger('user_id');
             $table->text('text');
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
         });
 
@@ -25,6 +26,11 @@ class CreateCommentsTable extends Migration
             $table->foreign('work_id')
                 ->references('id')
                 ->on('works')
+                ->onDelete('cascade');
+
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('comments')
                 ->onDelete('cascade');
 
             $table->foreign('user_id')

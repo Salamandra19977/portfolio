@@ -8,5 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Comment::class, function (Faker $faker) {
     return [
         'text' => $faker->text(100),
+        'parent_id' => null
     ];
 });

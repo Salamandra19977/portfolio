@@ -3,7 +3,7 @@
 @section('title', 'Show Work')
 
 @section('content')
-    <section>
+    <section class="pb-0">
         <div class="container">
             <div class="text-center pt-5">
                 <h2>{{$work->name}}</h2>
@@ -67,10 +67,29 @@
                         </div>
                         <div class="col-lg-1 comment">
                             <i class="fa fa-comment "></i>
-                            <span>{{ $work->comments->count('id') }}</span>
+                            <span>{{ dd($work->comments->count('work_id')) }}</span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-4">
+        <div class="container">
+            <div>
+                <h4 class="pb-4">Коментарии:</h4>
+                @include('userprofile.works.commentsShow', ['comments' => $work->comments, 'work_id' => $work->id])
+                <h4 class="pt-4">Добавить коментарий:</h4>
+                <form method="post" action="{{ route('comment.store') }}">
+                    @csrf
+                    <div >
+                        <textarea name="text" class="commentBox"></textarea>
+                        <input type="hidden" name="work_id" value="{{ $work->id }}" />
+                    </div>
+                    <div >
+                        <input type="submit" class="commented"  value="Добавить коментарий" />
+                    </div>
+                </form>
             </div>
         </div>
     </section>

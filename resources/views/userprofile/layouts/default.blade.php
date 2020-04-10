@@ -31,6 +31,30 @@
 <script type="text/javascript">
     var token = '{{ Session::token() }}';
     var urlAssessment = '{{route('work.assessment')}}';
+    $(".commentForm").hide();
+    $(".commentEdit").hide();
+    $(".cancel").hide();
+    $("body").on('click', '#reply', function(event) {
+        event.preventDefault();
+        $(this).hide();
+        $(this).parent().parent().children(".commentForm").show();
+        $(this).parent().children(".cancel").show();
+    });
+    $("body").on('click', '#editBtnCom', function(event) {
+        event.preventDefault();
+        $(this).hide();
+        $(this).parent().parent().children(".commentEdit").show();
+        $(this).parent().children(".cancel").show();
+    });
+    $("body").on('click',".cancel", function (event) {
+        event.preventDefault();
+        $(this).hide();
+        $(this).parent().children("#reply").show();
+        $(this).parent().children("#editBtnCom").show();
+        $(this).parent().parent().children(".commentForm").hide();
+        $(this).parent().parent().children(".commentEdit").hide();
+    })
 </script>
+
 </body>
 </html>

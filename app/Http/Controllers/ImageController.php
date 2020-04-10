@@ -12,7 +12,7 @@ class ImageController extends Controller
 {
     public function destroy($id)
     {
-        $image = Image::where("id", $id)->get()->first();
+        $image = Image::where("id", $id)->first();
         if($image->work->user->id == Auth::id()) {
             Storage::disk('public')->delete($image->patch);
             $image->delete();
