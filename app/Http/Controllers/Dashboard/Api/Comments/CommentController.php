@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dashboard\Api\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -50,6 +52,13 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::user()){
+            $comment =Comment::findOrfail($id);
+            $comment->delete();
+            $comments = Comment::with('user')->get();
+            return response()->json($comments,200);
+        }
+
+        return redirect()->route('userprofile');
     }
 }

@@ -14,7 +14,7 @@ class StatsController extends Controller
 {
     public function index()
     {
-        $data['auth_user'] = (Auth::guard('web')->user());
+        $data['auth_user'] = Auth::user();
         $data['count_users'] = User::get()->count('id');
         $data['count_works'] = Work::get()->count('id');
         $data['count_comments'] = Comment::get()->count('id');

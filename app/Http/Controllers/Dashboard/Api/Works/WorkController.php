@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Api\Works;
 use App\Http\Controllers\Controller;
 use App\Models\Work;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WorkController extends Controller
 {
@@ -15,8 +16,13 @@ class WorkController extends Controller
      */
     public function index()
     {
-        $works = Work::with('user')->get();
-        return response()->json($works,200);
+        if(Auth::user()){
+            $works = Work::with('user')->get();
+            return response()->json($works,200);
+        }
+
+        return redirect()->route('userprofile');
+
     }
 
     /**

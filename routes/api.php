@@ -14,12 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 Route::get('/home','Dashboard\Api\Stats\StatsController@index');
 Route::get('/users','Dashboard\Api\Users\UserController@index');
-Route::get('/users','Dashboard\Api\Users\UserController@index');
+
+Route::post('/users/update','Dashboard\Api\Users\UserController@update');
+
 Route::get('/works','Dashboard\Api\Works\WorkController@index');
 Route::get('/images','Dashboard\Api\Images\ImageController@index');
 Route::get('/comments','Dashboard\Api\Comments\CommentController@index');
+Route::get('/comments/del/{id}','Dashboard\Api\Comments\CommentController@destroy');

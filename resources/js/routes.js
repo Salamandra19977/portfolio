@@ -11,7 +11,7 @@ export default new VueRouter ({
             component: Home
         },
         {
-            path: '/dashboard/users',
+            path: '/dashboard/userslist',
             component: Users,
             name: 'Users',
 

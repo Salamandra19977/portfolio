@@ -36,7 +36,3 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/dashboard/{any}', 'Dashboard\DashboardController@index')->where('any', '.*');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -31,10 +31,10 @@
                                     <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form method="post">
                                         <div class="form-group">
                                             <label>Имя</label>
-                                            <input type="text" placeholder="Имя" class="form-control">
+                                            <input v-bind:aria-value="user.name" type="text" placeholder="Имя" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Email</label>
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" value="Сохранить" class="btn btn-primary">
-                                            <button type="button" data-dismiss="modal" class="btn btn-secondary">Закрыть</button>
+                                            <button type="button" v-on:click.prevent="updateUser(user.id)"  data-dismiss="modal" class="btn btn-secondary">Закрыть</button>
                                         </div>
                                     </form>
                                 </div>
@@ -81,6 +81,11 @@
             getUsers() {
                 axios.get('/api/users')
                     .then(r => this.users = r.data)
+            },
+            updateUser(id) {
+                    axios['post']('/api/users/update', this.data)
+                        .then(response => console.log(response))
+                        .catch(error => console.log(error));
             }
         },
         created() {
