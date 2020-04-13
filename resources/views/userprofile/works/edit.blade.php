@@ -53,7 +53,7 @@
                 <div class="row justify-content-center d-flex">
                     @forelse($work->images as $image)
                         <div class="col-lg-2">
-                            <img src="http://portfolio/storage/{{$image->patch}}" alt="image" class="img-fluid">
+                            <img src="/storage/{{$image->patch_cover}}" alt="image" class="img-fluid">
                             <a class="pt-2 btn btn-primary mt-2 mb-4"  href="{{route('image.remove', $image->id)}}" onclick="return confirm('Вы действительно хотите удалить?');">Удалить</a>
                         </div>
                     @empty

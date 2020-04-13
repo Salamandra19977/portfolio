@@ -31,6 +31,11 @@ class Work extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function commentsCount()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
     public function comments()
     {
         return $this->hasMany('App\Models\Comment')->whereNull('parent_id');

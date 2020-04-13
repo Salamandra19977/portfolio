@@ -4,15 +4,15 @@
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"> <a href="/" class="nav-link active">Главная</a></li>
-                    <li class="nav-item"> <a href="/" class="nav-link">Работы</a></li>
+                    <li class="nav-item"> <a href="/" class="nav-link">Главная</a></li>
+                    <li class="nav-item"> <a href="{{route('works')}}" class="nav-link">Работы</a></li>
                 @if (Route::has('login'))
                     @auth
                         <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{Auth::user()->name}}</a>
                             <div class="dropdown-menu">
                                 <a href="{{ url('/userprofile') }}" class="dropdown-item">Мой профиль</a>
                                 @if(Auth::user()->role->id == 3)
-                                    <a href="{{ url('/dashboard') }}" class="dropdown-item">Админ панель</a>
+                                    <a href="{{ url('/dashboard/home') }}" class="dropdown-item">Админ панель</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

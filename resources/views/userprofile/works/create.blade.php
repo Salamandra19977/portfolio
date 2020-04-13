@@ -40,7 +40,7 @@
 
                     <div class="col-md-6">
 
-                        <input type="file" name="images[]" multiple accept="image/*,image/jpeg" class="form-control @error('images') is-invalid @enderror">
+                        <input type="file" name="images[]" multiple accept="image/*,image/jpeg" class="form-control @error('images') is-invalid @enderror" required>
 
                         @error('images')
                         <span class="invalid-feedback" role="alert">

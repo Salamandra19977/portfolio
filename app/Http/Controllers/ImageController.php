@@ -15,6 +15,7 @@ class ImageController extends Controller
         $image = Image::where("id", $id)->first();
         if($image->work->user->id == Auth::id()) {
             Storage::disk('public')->delete($image->patch);
+            Storage::disk('public')->delete($image->patch_cover);
             $image->delete();
         }
         return redirect()->back();

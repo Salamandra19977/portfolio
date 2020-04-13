@@ -13,6 +13,7 @@ class Image extends Model
         $image->size = $data['size'];
         $image->extension = $data['extension'];
         $image->patch = $data['patch'];
+        $image->patch_cover = $data['patch_cover'];
         $image->work_id = $data['work_id'];
 
         $image->save();

@@ -20,7 +20,7 @@ class WorkController extends Controller
     public function index()
     {
         $works = Work::paginate(9);
-        return view('home.index', compact('works'));
+        return view('home.work', compact('works'));
     }
 
     /**
@@ -56,8 +56,9 @@ class WorkController extends Controller
                 $data['size'] = $file->getSize();
                 $data['extension'] = $file->extension();
                 $data['patch'] = $file->store('/images', 'public');
+                $data['patch_cover'] = $file->store('/covers', 'public');
                 $data['work_id'] = $work->id;
-
+                $this->resizeImage($data['patch_cover']);
                 Image::add($data);
             }
             return redirect()->route('userprofile');
@@ -114,7 +115,9 @@ class WorkController extends Controller
                     $data['size'] = $file->getSize();
                     $data['extension'] = $file->extension();
                     $data['patch'] = $file->store('/images', 'public');
+                    $data['patch_cover'] = $file->store('/covers', 'public');
                     $data['work_id'] = $work->id;
+                    $this->resizeImage($data['patch_cover']);
 
                     Image::add($data);
                 }
@@ -136,6 +139,7 @@ class WorkController extends Controller
             $images = $work->images;
             foreach ($images as $image) {
                 Storage::disk('public')->delete($image->patch);
+                Storage::disk('public')->delete($image->patch_cover);
             }
             $work->delete();
         }
@@ -194,6 +198,12 @@ class WorkController extends Controller
             "countLike" => $countLike,
             "countDisLike" => $countDisLike
         ];
+    }
+
+    public function resizeImage($patch)
+    {
+        $img = \Intervention\Image\Facades\Image::make("storage/".$patch);
+        $img->resize(640,480)->save();
     }
 
 }

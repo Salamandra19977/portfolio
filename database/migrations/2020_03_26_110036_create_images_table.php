@@ -17,6 +17,7 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('patch');
+            $table->string('patch_cover');
             $table->unsignedInteger('size');
             $table->string('extension');
             $table->unsignedBigInteger('work_id');

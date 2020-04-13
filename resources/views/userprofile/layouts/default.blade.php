@@ -54,6 +54,12 @@
         $(this).parent().parent().children(".commentForm").hide();
         $(this).parent().parent().children(".commentEdit").hide();
     })
+    function copyLink() {
+        var copyText = document.getElementById("linkBox");
+        copyText.select();
+        document.execCommand("copy");
+        alert("Скопировано: " + copyText.value);
+    }
 </script>
 
 </body>

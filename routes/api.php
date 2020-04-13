@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/home','Dashboard\Api\Stats\StatsController@index');
+Route::get('/users','Dashboard\Api\Users\UserController@index');
+Route::get('/users','Dashboard\Api\Users\UserController@index');
+Route::get('/works','Dashboard\Api\Works\WorkController@index');
+Route::get('/images','Dashboard\Api\Images\ImageController@index');
+Route::get('/comments','Dashboard\Api\Comments\CommentController@index');
