@@ -11,7 +11,7 @@
                         <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{Auth::user()->name}}</a>
                             <div class="dropdown-menu">
                                 <a href="{{ url('/userprofile') }}" class="dropdown-item">Мой профиль</a>
-                                @if(Auth::user()->role->id == 3)
+                                @if(Auth::user()->role->id == 1)
                                     <a href="{{ url('/dashboard/home') }}" class="dropdown-item">Админ панель</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"

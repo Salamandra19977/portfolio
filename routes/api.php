@@ -20,9 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home','Dashboard\Api\Stats\StatsController@index');
 Route::get('/users','Dashboard\Api\Users\UserController@index');
 
-Route::post('/users/update','Dashboard\Api\Users\UserController@update');
+//Route::post('/users/update','Dashboard\Api\Users\UserController@update');
+//Route::post('/users/update','Dashboard\Api\Users\UserController@update');
 
 Route::get('/works','Dashboard\Api\Works\WorkController@index');
 Route::get('/images','Dashboard\Api\Images\ImageController@index');
 Route::get('/comments','Dashboard\Api\Comments\CommentController@index');
 Route::get('/comments/del/{id}','Dashboard\Api\Comments\CommentController@destroy');
+Route::get('/works/del/{id}','Dashboard\Api\Works\WorkController@destroy');
+Route::get('/images/del/{id}','Dashboard\Api\Images\ImageController@destroy');

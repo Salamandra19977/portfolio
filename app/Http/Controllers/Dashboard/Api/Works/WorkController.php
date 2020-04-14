@@ -16,36 +16,14 @@ class WorkController extends Controller
      */
     public function index()
     {
-        if(Auth::user()){
+        if(Auth::user()->role_id == 1){
             $works = Work::with('user')->get();
+
             return response()->json($works,200);
         }
 
-        return redirect()->route('userprofile');
+        return response()->json("error",401);
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
@@ -56,6 +34,14 @@ class WorkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::user()->role_id == 1){
+            $work =Work::findOrfail($id);
+            $work->delete();
+            $comments = Work::with('user')->get();
+
+            return response()->json($comments,200);
+        }
+
+        return response()->json("error",401);
     }
 }

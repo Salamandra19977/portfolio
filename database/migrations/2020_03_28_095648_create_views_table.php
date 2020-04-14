@@ -15,7 +15,7 @@ class CreateViewsTable extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->string('ip')->unique();
+            $table->string('ip');
             $table->unsignedBigInteger('work_id');
             $table->timestamps();
         });

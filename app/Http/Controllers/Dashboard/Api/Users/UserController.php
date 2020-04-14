@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Api\Users;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,10 +14,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $users = User::with('role')->get();
-        return response()->json($users,200);
+        if(Auth::user()->role_id == 1) {
+            $users = User::with('role')->get();
+
+            return response()->json($users, 200);
+        }
+
+        return response()->json("error",401);
     }
 
     /**
@@ -28,8 +35,30 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        return response()->json($request,200);
+        if(Auth::user()->role_id == 1){
+            $user = User::where("id", $request['id'])->first();
+            $password = $request['password'];
+            if($password == null) {
+                $password = $user->password;
+            }
+            else {
+                $password = bcrypt($password);
+            }
+            $user->update([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'city' => $request['city'],
+                'sex' => $request['sex'],
+                'role_id' => $request['role_id'],
+                'password' => $password
+            ]);
 
+            $users = User::with('role')->get();
+
+            return response()->json($users,200);
+        }
+
+        return response()->json("error",401);
     }
 
     /**

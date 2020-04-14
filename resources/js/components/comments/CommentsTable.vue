@@ -39,12 +39,24 @@
             getComments() {
                 axios.get('/api/comments')
                     .then(r => this.comments = r.data)
+                    .catch(error => {
+                        console.log(error.response.status);
+                        if (error.response.status == 401){
+                            window.location.href = 'portfolio';
+                        }
+                    });
             },
             del(id, index) {
                 if (confirm("Вы действительно хотите удалить коментарий?")) {
                     var app = this;
                     axios.get('/api/comments/del/' + id)
                         .then(r => this.comments = r.data)
+                        .catch(error => {
+                            console.log(error.response.status);
+                            if (error.response.status == 401){
+                                window.location.href = 'portfolio';
+                            }
+                        });
                 }
             }
         },

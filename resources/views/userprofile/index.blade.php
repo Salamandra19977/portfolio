@@ -50,9 +50,9 @@
                         @forelse($work->images as $image)
                             <div class="col-lg-4 p-0"><a href="/storage/{{$image->patch}}" data-lightbox="image-1" data-title="{{$work->name}}" class="portfolio-item"><img src="/storage/{{$image->patch_cover}}" alt="image" class="img-fluid"></a></div>
                         @empty
-                            <div class="text-center pt-5">
-                                <p class="lead text-muted mt-2"></p>
-                            </div>
+                            <div class="col-lg-4 p-0"><a href="{{asset('/img/noimage1.jpg')}}" data-lightbox="image-1" data-title="{{$work->name}}" class="portfolio-item"><img src="{{asset('/img/noimage1.jpg')}}" alt="image" class="img-fluid"></a></div>
+                            <div class="col-lg-4 p-0"><a href="{{asset('/img/noimage1.jpg')}}" data-lightbox="image-1" data-title="{{$work->name}}" class="portfolio-item"><img src="{{asset('/img/noimage1.jpg')}}" alt="image" class="img-fluid"></a></div>
+                            <div class="col-lg-4 p-0"><a href="{{asset('/img/noimage1.jpg')}}" data-lightbox="image-1" data-title="{{$work->name}}" class="portfolio-item"><img src="{{asset('/img/noimage1.jpg')}}" alt="image" class="img-fluid"></a></div>
                         @endforelse
                     </div>
                     <div class="post-details pb-2 h5 pt-4">

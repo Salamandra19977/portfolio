@@ -18,6 +18,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/works', 'WorkController@index')->name('works');
 Route::get('/userprofile/id{id}', 'UserProfileController@show')->name('userprofile.show');
 Route::get('show/work/id{id}', 'WorkController@show')->name('work.show');
+Route::post('/admin/users/update','Dashboard\Api\Users\UserController@update');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/user/edit', 'UserController@edit')->name('user.edit');
@@ -34,5 +35,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/remove/comment/id{id}','CommentController@destroy')->name('comment.remove');
     Route::post('/assessment','WorkController@assessment')->name('work.assessment');
 
+    Route::get('/dashboard/{any}', 'Dashboard\DashboardController@index')->where('any', '.*');
+    Route::post('/admin/users/update','Dashboard\Api\Users\UserController@update');
+});
+Route::group(['middleware' => 'role:administator;'], function() {
     Route::get('/dashboard/{any}', 'Dashboard\DashboardController@index')->where('any', '.*');
 });

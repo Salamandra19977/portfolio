@@ -41,14 +41,14 @@ class WorkController extends Controller
      */
     public function store(Request $request)
     {
+        $work = Work::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'user_id' => Auth::id(),
+            'status_id' => 1
+        ]);
         if ($request->hasFile('images'))
         {
-            $work = Work::create([
-                'name' => $request['name'],
-                'description' => $request['description'],
-                'user_id' => Auth::id(),
-                'status_id' => 1
-            ]);
             $files = $request->file('images');
             foreach ($files as $file){
                 $data = [];
@@ -74,6 +74,24 @@ class WorkController extends Controller
     public function show($id)
     {
         $work = Work::where("id", $id)->first();
+        $ip = null;
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        $view = $work->views->where('ip',$ip)->first();
+
+        if(!isset($view)){
+            View::create([
+                'ip' => $ip,
+                'work_id' => $id
+            ]);
+        }
+
         return view('userprofile.works.show', compact('work'));
     }
 

@@ -14,7 +14,11 @@
                 <div class="post col-md-4 position-relative">
                     <div class="post-thumbnail">
                         <a href="{{route("work.show", $work->id)}}">
-                        <img  src="/storage/{{$work->images->first()->patch_cover}}" alt="..." class="img-fluid">
+                            @if(isset($work->images[0]->patch_cover) == true)
+                                <img  src="/storage/{{$work->images[0]->patch_cover}}" alt="..." class="img-fluid">
+                            @else
+                                <img src="{{asset('/img/noimage1.jpg')}}" class="img-fluid">
+                            @endif
                         <p class="h6 position-absolute m-3 p-4 justify-content-center work_name text-white ">{{$work->name}}</p></a>
                     </div>
                     <div class="post-details pb-2">

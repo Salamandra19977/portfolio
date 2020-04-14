@@ -36,8 +36,6 @@
                 <!-- Sidebar Header-->
                 <div class="sidebar-header d-flex align-items-center">
                     <div class="title">
-                        <h1 class="h4">Mark Stephen</h1>
-                        <p>Администратор</p>
                     </div>
                 </div>
                 <!-- Sidebar Navidation Menus--><span class="heading">Меню</span>
