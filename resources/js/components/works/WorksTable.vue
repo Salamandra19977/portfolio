@@ -11,7 +11,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(work,index) in works">
+        <tr v-for="(work,index) in works.data">
             <th scope="row">{{work.id}}</th>
             <td>{{work.name}}</td>
             <td>{{work.description}}</td>
@@ -24,6 +24,7 @@
             </td>
         </tr>
         </tbody>
+        <pagination :data="works" @pagination-change-page="getResults"></pagination>
     </table>
 </template>
 
@@ -32,7 +33,7 @@
         name: "WorksTable.vue",
         data() {
             return {
-                works: []
+                works: {}
             }
         },
         methods: {
@@ -43,6 +44,12 @@
                         if (error.response.status == 401){
                             window.location.href = 'portfolio';
                         }
+                    });
+            },
+            getResults(page = 1) {
+                axios.get('/api/works?page=' + page)
+                    .then(response => {
+                        this.works = response.data;
                     });
             },
             del(id, index) {

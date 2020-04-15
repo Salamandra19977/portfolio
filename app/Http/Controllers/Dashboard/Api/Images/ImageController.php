@@ -17,8 +17,8 @@ class ImageController extends Controller
 
     public function index()
     {
-        if(Auth::user()->role_id == 1) {
-            $images = Image::all();
+        if(Auth::user() && Auth::user()->role_id == 1) {
+            $images = Image::paginate(5);
 
             return response()->json($images, 200);
         }
@@ -33,10 +33,10 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->role_id == 1){
+        if(Auth::user() && Auth::user()->role_id == 1){
             $image = Image::findOrfail($id);
             $image->delete();
-            $images = Image::all();
+            $images = Image::paginate(5);
             return response()->json($images,200);
         }
 

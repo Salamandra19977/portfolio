@@ -13,7 +13,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(user,index) in users">
+            <tr v-for="(user,index) in users.data">
                 <th scope="row">{{user.id}}</th>
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
@@ -25,6 +25,7 @@
                 </td>
             </tr>
             </tbody>
+            <pagination :data="users" @pagination-change-page="getResults"></pagination>
         </table>
         <div class="card-body p-0 text-center d-flex justify-content-lg-start">
             <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" class="modal fade text-left" style="display: none;" aria-hidden="true">
@@ -84,7 +85,7 @@
         name: "UsersTable",
         data() {
             return {
-                users: [],
+                users: {},
                 user: {
                     id: '',
                     name: '',
@@ -97,6 +98,12 @@
             }
         },
         methods: {
+            getResults(page = 1) {
+                axios.get('/api/users?page=' + page)
+                    .then(response => {
+                        this.users = response.data;
+                    });
+            },
             getUsers() {
                 axios.get('/api/users')
                     .then(r => this.users = r.data)
@@ -120,12 +127,12 @@
                     });
             },
             insertData(index) {
-                this.user.id = this.users[index].id;
-                this.user.name = this.users[index].name;
-                this.user.email = this.users[index].email;
-                this.user.city = this.users[index].city;
-                this.user.sex = this.users[index].sex;
-                this.user.role_id = this.users[index].role_id;
+                this.user.id = this.users.data[index].id;
+                this.user.name = this.users.data[index].name;
+                this.user.email = this.users.data[index].email;
+                this.user.city = this.users.data[index].city;
+                this.user.sex = this.users.data[index].sex;
+                this.user.role_id = this.users.data[index].role_id;
                 this.user.password = null;
             },
             onChangeSex(event) {

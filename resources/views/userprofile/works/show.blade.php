@@ -99,9 +99,18 @@
         <div class="container">
             <div>
                 <h4 class="pb-4">Коментарии:</h4>
-                @include('userprofile.works.commentsShow', ['comments' => $work->comments, 'work_id' => $work->id])
-                @auth
                 <h4 class="pt-4">Добавить коментарий:</h4>
+                @include('userprofile.works.commentsShow', ['comments' => $work->comments, 'work_id' => $work->id])
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger d-flex col-lg-4">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @auth
                 <form method="post" action="{{ route('comment.store') }}">
                     @csrf
                     <div >

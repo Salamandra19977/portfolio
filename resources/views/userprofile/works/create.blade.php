@@ -36,11 +36,11 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-md-4 col-form-label text-md-right">Изображения</label>
+                    <label for="images[]" class="col-md-4 col-form-label text-md-right">Изображения</label>
 
                     <div class="col-md-6">
 
-                        <input type="file" name="images[]" multiple accept="image/*,image/jpeg" class="form-control @error('images') is-invalid @enderror" required>
+                        <input type="file" name="images[]" multiple accept="image/*,image/jpeg" class="form-control @error('images') is-invalid @enderror">
 
                         @error('images')
                         <span class="invalid-feedback" role="alert">

@@ -15,33 +15,15 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
-        $comments = Comment::with('user')->get();
-        return response()->json($comments,200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        if( Auth::user() && Auth::user()->role_id == 1) {
+            $comments = Comment::with('user')->paginate(8);
+            return response()->json($comments, 200);
+        }
+        return response()->json("error",401);
     }
 
     /**
@@ -52,13 +34,14 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()){
+        if( Auth::user() && Auth::user()->role_id == 1){
             $comment =Comment::findOrfail($id);
             $comment->delete();
-            $comments = Comment::with('user')->get();
+            $comments = Comment::with('user')->paginate(8);
+
             return response()->json($comments,200);
         }
 
-        return redirect()->route('userprofile');
+        return response()->json("error",401);
     }
 }

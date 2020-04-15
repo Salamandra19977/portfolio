@@ -16,8 +16,8 @@ class WorkController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role_id == 1){
-            $works = Work::with('user')->get();
+        if(Auth::user() && Auth::user()->role_id == 1){
+            $works = Work::with('user')->paginate(5);
 
             return response()->json($works,200);
         }
@@ -34,12 +34,12 @@ class WorkController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->role_id == 1){
+        if(Auth::user() && Auth::user()->role_id == 1){
             $work =Work::findOrfail($id);
             $work->delete();
-            $comments = Work::with('user')->get();
+            $works = Work::with('user')->paginate(5);
 
-            return response()->json($comments,200);
+            return response()->json($works,200);
         }
 
         return response()->json("error",401);

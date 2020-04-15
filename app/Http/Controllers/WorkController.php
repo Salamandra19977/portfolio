@@ -41,6 +41,11 @@ class WorkController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>'required',
+            'description' =>'required',
+            'images.*' => 'mimes:jpg,jpeg,png|max:20000'
+        ]);
         $work = Work::create([
             'name' => $request['name'],
             'description' => $request['description'],
@@ -61,8 +66,9 @@ class WorkController extends Controller
                 $this->resizeImage($data['patch_cover']);
                 Image::add($data);
             }
-            return redirect()->route('userprofile');
         }
+
+        return redirect()->route('userprofile');
     }
 
     /**
@@ -116,6 +122,11 @@ class WorkController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name'=>'required',
+            'description' =>'required',
+            'images.*' => 'mimes:jpg,jpeg,png|max:20000'
+        ]);
         $work = Work::where("id", $id)->first();
         if($work->user_id == Auth::id()){
             $work->update([
@@ -140,8 +151,9 @@ class WorkController extends Controller
                     Image::add($data);
                 }
             }
-            return redirect()->route('userprofile');
         }
+
+        return redirect()->route('userprofile');
     }
 
     /**
@@ -161,6 +173,7 @@ class WorkController extends Controller
             }
             $work->delete();
         }
+
         return redirect()->route('userprofile');
     }
 

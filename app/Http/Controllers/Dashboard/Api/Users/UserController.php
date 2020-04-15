@@ -17,8 +17,8 @@ class UserController extends Controller
 
     public function index()
     {
-        if(Auth::user()->role_id == 1) {
-            $users = User::with('role')->get();
+        if(Auth::user() && Auth::user()->role_id == 1) {
+            $users = User::with('role')->paginate(10);
 
             return response()->json($users, 200);
         }
@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        if(Auth::user()->role_id == 1){
+        if(Auth::user() && Auth::user()->role_id == 1){
             $user = User::where("id", $request['id'])->first();
             $password = $request['password'];
             if($password == null) {
@@ -53,7 +53,7 @@ class UserController extends Controller
                 'password' => $password
             ]);
 
-            $users = User::with('role')->get();
+            $users = User::with('role')->paginate(10);
 
             return response()->json($users,200);
         }
@@ -61,14 +61,4 @@ class UserController extends Controller
         return response()->json("error",401);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

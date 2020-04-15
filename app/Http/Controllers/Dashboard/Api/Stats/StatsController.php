@@ -16,7 +16,7 @@ class StatsController extends Controller
     public function index()
     {
 
-        if(Auth::user()->role_id == 1) {
+        if(Auth::user() && Auth::user()->role_id == 1) {
             $data['auth_user'] = Auth::user();
             $data['count_users'] = User::get()->count('id');
             $data['count_works'] = Work::get()->count('id');
