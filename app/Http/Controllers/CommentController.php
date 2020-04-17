@@ -38,6 +38,9 @@ class CommentController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'text'=>'required',
+        ]);
         $comment = Comment::where("id", $id)->first();
         if($comment->user_id == Auth::id()){
             $data = $request->all();

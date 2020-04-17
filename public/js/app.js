@@ -40171,7 +40171,7 @@ var render = function() {
                               "option",
                               {
                                 staticClass: "form-control",
-                                attrs: { value: "1" }
+                                attrs: { value: "мужской" }
                               },
                               [_vm._v("Мужской")]
                             ),
@@ -40180,7 +40180,7 @@ var render = function() {
                               "option",
                               {
                                 staticClass: "form-control",
-                                attrs: { value: "2" }
+                                attrs: { value: "женский" }
                               },
                               [_vm._v("Женский")]
                             )

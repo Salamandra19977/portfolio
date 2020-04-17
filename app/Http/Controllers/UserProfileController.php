@@ -12,25 +12,23 @@ use Storage;
 
 class UserProfileController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
     public function index()
     {
         $works = Work::where('user_id','=',Auth::id())->orderBy('created_at','desc')->paginate(9);
+
         return view('userprofile.index', compact('works'));
     }
 
     public function show($id)
     {
-        $works = Work::where('user_id','=', $id)->orderBy('created_at','desc')->paginate(9);
-        return view('userprofile.index', compact('works'));
-    }
 
-    public function upload(Request $request)
-    {
-        dd($request->all());
+        $works = Work::where('user_id','=', $id)->orderBy('created_at','desc')->with('user')->paginate(9);
+
+        if(count($works) == 0){
+            abort('404');
+        }
+
+        return view('userprofile.index', compact('works'));
     }
 }

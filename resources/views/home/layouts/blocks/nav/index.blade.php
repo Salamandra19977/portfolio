@@ -4,8 +4,8 @@
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"> <a href="/" class="nav-link">Главная</a></li>
-                    <li class="nav-item"> <a href="{{route('works')}}" class="nav-link">Работы</a></li>
+                    <li class="nav-item"> <a href="/" class="nav-link @if(Route::currentRouteName() == "home") active-color @endif">Главная</a></li>
+                    <li class="nav-item"> <a href="{{route('works')}}" class="nav-link @if(Route::currentRouteName() == "works") active-color @endif">Работы</a></li>
                 @if (Route::has('login'))
                     @auth
                         <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{Auth::user()->name}}</a>

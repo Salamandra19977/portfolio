@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\Role;
 
 class CheckRole
 {
@@ -17,11 +18,10 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $roles)
+    public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        $rolesArray = explode(';', $roles);
-        if(in_array($user->role->name, $rolesArray)){
+        if(Auth::user() && $user->role_id == 1){
             return $next($request);
         }else{
             return redirect()->route('login');

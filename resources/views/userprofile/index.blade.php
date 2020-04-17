@@ -16,8 +16,10 @@
                         Редактировать профиль
                     </a>
                     <div class="d-flex mr-2 mt-2 align-content-end">
-                        <input id="linkBox" type="text" class="to-copy replybox" placeholder="Type something..." aria-label="Type something" value="{{Request::url().'/id'.Auth::id()}}">
-                        <button onclick="copyLink()" class="commented"><i class="fa fa-copy"></i> Скопировать ссылку на профиль</button>
+                        @if(isset($works[0]))
+                            <input id="linkBox" type="text" class="to-copy replybox" placeholder="Type something..." aria-label="Type something" value="{{Request::url().'/id'.Auth::id()}}">
+                            <button onclick="copyLink()" class="commented"><i class="fa fa-copy"></i> Скопировать ссылку на профиль</button>
+                        @endif
                     </div>
                 </div>
             @endif

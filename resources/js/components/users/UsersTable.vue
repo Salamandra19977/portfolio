@@ -49,8 +49,8 @@
                                     <label>Пол</label>
                                     <select class="form-control" name="sex" v-model="user.sex">
                                         <option class="form-control" disabled selected>Выберите пол</option>
-                                        <option class="form-control" value="1">Мужской</option>
-                                        <option class="form-control" value="2">Женский</option>
+                                        <option class="form-control" value="мужской">Мужской</option>
+                                        <option class="form-control" value="женский">Женский</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

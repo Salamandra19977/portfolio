@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/works', 'WorkController@index')->name('works');
 Route::get('/userprofile/id{id}', 'UserProfileController@show')->name('userprofile.show');
 Route::get('show/work/id{id}', 'WorkController@show')->name('work.show');
@@ -34,10 +35,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/edit/comment/id{id}','CommentController@update')->name('comment.edit');
     Route::get('/remove/comment/id{id}','CommentController@destroy')->name('comment.remove');
     Route::post('/assessment','WorkController@assessment')->name('work.assessment');
-
-    Route::get('/dashboard/{any}', 'Dashboard\DashboardController@index')->where('any', '.*');
     Route::post('/admin/users/update','Dashboard\Api\Users\UserController@update');
+
 });
-Route::group(['middleware' => 'role:administator;'], function() {
+Route::group(['middleware' => 'role'], function() {
     Route::get('/dashboard/{any}', 'Dashboard\DashboardController@index')->where('any', '.*');
 });

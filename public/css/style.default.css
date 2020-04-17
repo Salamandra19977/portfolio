@@ -647,7 +647,6 @@ STYLE SWITCHER FOR DEMO
   color: #fff;
   text-decoration: none;
 }
-
 /* =========================================
 
       THEMING OF THE BOOTSTRAP COMPONENTS
@@ -716,12 +715,12 @@ STYLE SWITCHER FOR DEMO
   color: rgba(0, 0, 0, 0.3);
 }
 
-.navbar-light .navbar-nav .show > .nav-link,
-.navbar-light .navbar-nav .active > .nav-link,
-.navbar-light .navbar-nav .nav-link.show,
-.navbar-light .navbar-nav .nav-link.active {
-  color: rgba(0, 0, 0, 0.9);
-}
+/*.navbar-light .navbar-nav .show > .nav-link,*/
+/*.navbar-light .navbar-nav .active > .nav-link,*/
+/*.navbar-light .navbar-nav .nav-link.show,*/
+/*.navbar-light .navbar-nav .nav-link.active {*/
+  /*color: rgba(0, 0, 0, 0.9);*/
+/*}*/
 
 .navbar-light .navbar-toggler {
   color: rgba(0, 0, 0, 0.5);
@@ -2465,4 +2464,8 @@ code {
 
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #6c757d;
+}
+
+.active-color {
+  color: #E7475E;
 }

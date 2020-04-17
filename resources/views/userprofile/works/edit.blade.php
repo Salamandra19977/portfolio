@@ -40,13 +40,13 @@
 
                     <div class="col-md-6">
 
-                        <input type="file" name="images[]" multiple accept="image/*,image/jpeg" class="form-control @error('images') is-invalid @enderror">
+                        <input type="file" name="images[]" multiple accept="image/*,image/jpeg"  class="form-control @if($errors->has('images.*'))) is-invalid @endif">
 
-                        @error('images')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                        @if($errors->has('images.*'))
+                            <span class="invalid-feedback d-flex" role="alert">
+                                <strong>Разрешен формат файлов только jpg,jpeg,png</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
 
