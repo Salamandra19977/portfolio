@@ -22,6 +22,7 @@
                 <td>{{user.created_at}}</td>
                 <td>
                     <button type="button" data-toggle="modal" v-on:click="insertData(index)" data-target="#myModal" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+                    <button type="button" v-on:click="del(user.id, index)" class="btn btn-primary"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
             </tbody>
@@ -103,6 +104,18 @@
                     .then(response => {
                         this.users = response.data;
                     });
+            },
+            del(id, index) {
+                if (confirm("Вы действительно хотите удалить работу?")) {
+                    var app = this;
+                    axios.get('/admin/users/del' + id)
+                        .then(r => this.users = r.data)
+                        .catch(error => {
+                            if (error.response.status == 401){
+                                window.location.href = 'portfolio';
+                            }
+                        });
+                }
             },
             getUsers() {
                 axios.get('/api/users')

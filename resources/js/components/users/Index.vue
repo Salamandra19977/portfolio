@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h3 class="h4">Таблица пользователей</h3>
+                            <h3 class="h3">Таблица пользователей</h3>
                         </div>
                         <div class="card-body">
                             <users-table></users-table>

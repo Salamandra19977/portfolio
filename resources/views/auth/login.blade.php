@@ -50,19 +50,24 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0 text-white">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Войти') }}
                                 </button>
-
-                                {{--@if (Route::has('password.request'))--}}
-                                    {{--<a class="btn btn-link" href="{{ route('password.request') }}">--}}
-                                        {{--{{ __('Забыли свой пароль?') }}--}}
-                                    {{--</a>--}}
-                                {{--@endif--}}
+                                <a class="btn btn-primary" href="{{route("login.facebook")}}">
+                                    <i class="fa fa-facebook-f"></i>
+                                    {{ __('facebook авторизация') }}
+                                </a>
                             </div>
                         </div>
+
+                        <div class="form-group row mb-0 mt-2">
+                            <div class="col-md-8 offset-md-4">
+
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

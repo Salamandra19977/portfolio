@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -36,5 +40,40 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        $userDataFromFacebook = Socialite::driver('facebook')->user();
+        $name = $userDataFromFacebook->getName();
+        $email = $userDataFromFacebook->getEmail();
+
+        $user = User::where(['email' => $email])->first();
+
+        if (!$user) {
+            $password = 'Gfhjkm20';
+            $user = User::create(
+                [
+                    'name' => $name,
+                    'email' => $email,
+                    'role_id' => 1,
+                    'city' => null,
+                    'sex' => 3,
+                    'password' => Hash::make($password)
+                ]
+            );
+        }
+
+        if(Auth::login($user)) {
+            return response()->redirectTo($this->redirectTo);
+        }
+
+        return response()->redirectTo('/login');
+
     }
 }

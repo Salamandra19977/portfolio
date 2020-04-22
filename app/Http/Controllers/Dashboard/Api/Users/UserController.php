@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Api\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +56,18 @@ class UserController extends Controller
 
             $users = User::with('role')->paginate(10);
 
+            return response()->json($users,200);
+        }
+
+        return response()->json("error",401);
+    }
+
+    public function destroy($id)
+    {
+        if(Auth::user() && Auth::user()->role_id == 1){
+            $user = User::findOrfail($id);
+            $user->delete();
+            $users = User::with('role')->paginate(10);
             return response()->json($users,200);
         }
 

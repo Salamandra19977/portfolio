@@ -2418,6 +2418,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UsersTable",
   data: function data() {
@@ -2443,11 +2444,25 @@ __webpack_require__.r(__webpack_exports__);
         _this.users = response.data;
       });
     },
-    getUsers: function getUsers() {
+    del: function del(id, index) {
       var _this2 = this;
 
+      if (confirm("Вы действительно хотите удалить работу?")) {
+        var app = this;
+        axios.get('/admin/users/del' + id).then(function (r) {
+          return _this2.users = r.data;
+        })["catch"](function (error) {
+          if (error.response.status == 401) {
+            window.location.href = 'portfolio';
+          }
+        });
+      }
+    },
+    getUsers: function getUsers() {
+      var _this3 = this;
+
       axios.get('/api/users').then(function (r) {
-        return _this2.users = r.data;
+        return _this3.users = r.data;
       })["catch"](function (error) {
         console.log(error.response.status);
 
@@ -2457,10 +2472,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateUser: function updateUser() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.post('/admin/users/update', this.user).then(function (r) {
-        return _this3.users = r.data;
+        return _this4.users = r.data;
       })["catch"](function (error) {
         if (error.response.status == 500) {
           alert("Уже есть пользователь с таким email");
@@ -39952,7 +39967,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header d-flex align-items-center" }, [
-      _c("h3", { staticClass: "h4" }, [_vm._v("Таблица пользователей")])
+      _c("h3", { staticClass: "h3" }, [_vm._v("Таблица пользователей")])
     ])
   }
 ]
@@ -40017,6 +40032,20 @@ var render = function() {
                     }
                   },
                   [_c("i", { staticClass: "fa fa-edit" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.del(user.id, index)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-trash" })]
                 )
               ])
             ])

@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
+Route::get('login/facebook', 'Auth\LoginController@redirectToProvider')->name("login.facebook");
+Route::get('login/user', 'Auth\LoginController@handleProviderCallback');
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/works', 'WorkController@index')->name('works');
 Route::get('/userprofile/id{id}', 'UserProfileController@show')->name('userprofile.show');
 Route::get('show/work/id{id}', 'WorkController@show')->name('work.show');
-Route::post('/admin/users/update','Dashboard\Api\Users\UserController@update');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/user/edit', 'UserController@edit')->name('user.edit');
@@ -36,6 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/remove/comment/id{id}','CommentController@destroy')->name('comment.remove');
     Route::post('/assessment','WorkController@assessment')->name('work.assessment');
     Route::post('/admin/users/update','Dashboard\Api\Users\UserController@update');
+    Route::get('/admin/users/del{id}','Dashboard\Api\Users\UserController@destroy');
 
 });
 Route::group(['middleware' => 'role'], function() {
